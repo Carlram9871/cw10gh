@@ -1,0 +1,40 @@
+﻿@page "/"
+@using CuestionarioWeb10.Models
+@using CuestionarioWeb10.Services
+@inject PreguntaService PreguntaService
+@inject NavigationManager NavigationManager
+
+<h3>Selecciona un tema</h3>
+
+@if (temas == null)
+{
+    <p>Cargando temas...</p>
+}
+else
+{
+    <ul>
+        <li>
+            <button @onclick="@(() => SeleccionarTema("Todos los temas"))">Todos los temas</button>
+        </li>
+        @foreach (var tema in temas)
+        {
+            <li>
+                <button @onclick="@(() => SeleccionarTema(tema))">@tema</button>
+            </li>
+        }
+    </ul>
+}
+
+@code {
+    private List<string> temas;
+
+    protected override async Task OnInitializedAsync()
+    {
+        temas = await PreguntaService.ObtenerTemasAsync();
+    }
+
+    private void SeleccionarTema(string tema)
+    {
+        NavigationManager.NavigateTo($"/estudiar?tema={Uri.EscapeDataString(tema)}");
+    }
+}

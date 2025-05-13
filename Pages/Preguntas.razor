@@ -1,0 +1,75 @@
+﻿@page "/preguntas"
+@using CuestionarioWeb10.Models
+@using CuestionarioWeb10.Services
+@inject PreguntaService Servicio
+
+<h3>Pregunta @preguntaActual?.Numero</h3>
+
+@if (preguntaActual != null)
+{
+    <p><strong>Tema:</strong> @preguntaActual.Tema</p>
+    <p><strong>Dificultad:</strong> @preguntaActual.Dificultad</p>
+
+    <div class="respuestas">
+        @foreach (var opcion in opciones)
+        {
+            <button @onclick="() => SeleccionarRespuesta(opcion)" class="respuesta-button">
+                @opcion
+            </button>
+        }
+    </div>
+
+    <p>@mensajeRespuesta</p>
+
+    <div class="navegacion">
+        <button @onclick="Anterior" disabled="@(_indice == 0)">Anterior</button>
+        <button @onclick="Siguiente" disabled="@(_indice >= preguntas.Count - 1)">Siguiente</button>
+    </div>
+}
+else
+{
+    <p>Cargando preguntas...</p>
+}
+
+@code {
+    private List<Pregunta> preguntas = new();
+    private Pregunta? preguntaActual;
+    private int _indice = 1;
+    private string mensajeRespuesta = "";
+    private string[] opciones = new[] { "A", "B", "C", "D" }; // Sustituye por opciones reales si las tienes
+
+    protected override async Task OnInitializedAsync()
+    {
+        preguntas = await Servicio.CargarPreguntasAsync();
+        if (preguntas.Any())
+            preguntaActual = preguntas[_indice];
+    }
+
+    private void Siguiente()
+    {
+        if (_indice < preguntas.Count - 1)
+        {
+            _indice++;
+            preguntaActual = preguntas[_indice];
+            mensajeRespuesta = "";
+        }
+    }
+
+    private void Anterior()
+    {
+        if (_indice > 0)
+        {
+            _indice--;
+            preguntaActual = preguntas[_indice];
+            mensajeRespuesta = "";
+        }
+    }
+
+    private void SeleccionarRespuesta(string seleccionada)
+    {
+        if (seleccionada == preguntaActual?.Respuesta)
+            mensajeRespuesta = "✅ ¡Correcto!";
+        else
+            mensajeRespuesta = $"❌ Incorrecto. Respuesta correcta: {preguntaActual?.Respuesta}";
+    }
+}

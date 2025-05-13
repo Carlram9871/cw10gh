@@ -1,0 +1,97 @@
+﻿@page "/estudiar/"
+
+@inject NavigationManager Navigation
+@using CuestionarioWeb10.Models
+@using CuestionarioWeb10.Services
+@inject PreguntaService PreguntaService
+
+<h3>Listado de Preguntas (@(string.IsNullOrEmpty(tema) ? "Todos los temas" : tema))</h3>
+
+@if (preguntas == null)
+{
+    <p>Cargando preguntas...</p>
+}
+else if (preguntas.Count == 0)
+{
+    <p>No hay preguntas disponibles.</p>
+}
+else
+{
+    <div class="pregunta-container">
+        <img src="@imagenActual" alt="Pregunta" style="max-width:100%; max-height:400px;" />
+
+        <div class="respuestas">
+            <button class="@ObtenerClaseBoton("A")" @onclick='() => SeleccionarRespuesta("A")'>A</button>
+            <button class="@ObtenerClaseBoton("B")" @onclick='() => SeleccionarRespuesta("B")'>B</button>
+            <button class="@ObtenerClaseBoton("C")" @onclick='() => SeleccionarRespuesta("C")'>C</button>
+            <button class="@ObtenerClaseBoton("D")" @onclick='() => SeleccionarRespuesta("D")'>D</button>
+        </div>
+
+        <div class="navegacion">
+            <button @onclick="Anterior" disabled="@(_indice == 0)">Anterior</button>
+            @if (_indice < preguntas.Count - 1)
+            {
+                <button @onclick="Siguiente">Siguiente</button>
+            }
+
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+
+    [SupplyParameterFromQuery]
+    public string? tema { get; set; }
+
+    private List<Pregunta> preguntas;
+    private int _indice = 0;
+    private string imagenActual => preguntas is not null ? $"imgPreguntas/Pregunta_{preguntas[_indice].Numero}.jpg" : "";
+
+    private string respuestaSeleccionada = null;
+    private bool? esCorrecta = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        preguntas = await PreguntaService.ObtenerPreguntasPorTemaAsync(tema);
+    }
+
+    private void SeleccionarRespuesta(string opcion)
+    {
+        respuestaSeleccionada = opcion;
+        var correcta = preguntas[_indice].Respuesta.Trim().ToUpper();
+        esCorrecta = (opcion == correcta);
+    }
+
+    private void Anterior()
+    {
+        if (_indice > 0)
+        {
+            _indice--;
+            LimpiarRespuesta();
+        }
+    }
+
+    private void Siguiente()
+    {
+        if (_indice < preguntas.Count - 1)
+        {
+            _indice++;
+            LimpiarRespuesta();
+        }
+    }
+
+    private void LimpiarRespuesta()
+    {
+        respuestaSeleccionada = null;
+        esCorrecta = null;
+    }
+
+    private string ObtenerClaseBoton(string opcion)
+    {
+        if (respuestaSeleccionada != opcion)
+            return "respuesta-button";
+
+        return esCorrecta == true ? "respuesta-button correcta" : "respuesta-button incorrecta";
+    }
+}
