@@ -1,8 +1,8 @@
 self.assetsManifest = {
-  "version": "zdq+YBx0",
+  "version": "A6xy95Wa",
   "assets": [
     {
-      "hash": "sha256-RK+mgO1a4lgn3UlWfWLFJMoWry+lmjeFIiLQscowOXk=",
+      "hash": "sha256-t8lbVaNm4GxyAYS1ijBXKoFJFaE6F0tXL/o+xl56VXk=",
       "url": "_framework/CuestionarioWeb10.wasm"
     },
     {
@@ -762,7 +762,7 @@ self.assetsManifest = {
       "url": "_framework/WindowsBase.wasm"
     },
     {
-      "hash": "sha256-pK+ypTmrLSy5cFfqrQNplAry+LHbzRsPgWUTfU0HDH0=",
+      "hash": "sha256-wqldd1DNFOI1Jz5jGe551U+7yhiOslpXkeSTNIo8vFo=",
       "url": "_framework/blazor.boot.json"
     },
     {
