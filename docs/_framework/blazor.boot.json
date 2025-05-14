@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "CuestionarioWeb10",
   "resources": {
-    "hash": "sha256-WGIvOw6hNNWgc6ud2/hMoWMTl4BHT5J/Yxq4ns+KmUE=",
+    "hash": "sha256-yC/8BluI1h3LbpI6pVT4Jg3dkk/rjy+fN84W0kINQ28=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-ftpNqtARtVNE8ku5eB/jXoklb41UQ+EutUHfwmbNTBY="
     },
@@ -18,7 +18,7 @@
     },
     "coreAssembly": {},
     "assembly": {
-      "CuestionarioWeb10.wasm": "sha256-8lMXRFthx8uWLtQtdYeB08lVwbPUkz3fClYGmeZZKXM=",
+      "CuestionarioWeb10.wasm": "sha256-RK+mgO1a4lgn3UlWfWLFJMoWry+lmjeFIiLQscowOXk=",
       "Microsoft.AspNetCore.Authorization.wasm": "sha256-dzswwxTfVvqZ1kXmOQSnuPXU5/dOuES3IABIuosjXSA=",
       "Microsoft.AspNetCore.Components.Forms.wasm": "sha256-+62TV9nf3bjEux5PLux447ANQeEl7xaM2g/fDxawK9U=",
       "Microsoft.AspNetCore.Components.wasm": "sha256-+2J48k1QvrXO2ZBGGRGmPmeGNTbXIRuc8wdnmJsgjA8=",
