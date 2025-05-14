@@ -1,8 +1,8 @@
 self.assetsManifest = {
-  "version": "NF1wM0+z",
+  "version": "9Ke4cmkR",
   "assets": [
     {
-      "hash": "sha256-VtmreKp0Xs709wx03ah1vlnMy+1cdltRbmD7fvHtG7c=",
+      "hash": "sha256-8lMXRFthx8uWLtQtdYeB08lVwbPUkz3fClYGmeZZKXM=",
       "url": "_framework/CuestionarioWeb10.wasm"
     },
     {
@@ -762,7 +762,7 @@ self.assetsManifest = {
       "url": "_framework/WindowsBase.wasm"
     },
     {
-      "hash": "sha256-rYso4veQaiqk39LYVPqUERdug/u/8sBGPpzpZm5mGxg=",
+      "hash": "sha256-ni51ITlBGgL5tPFO8SSyJ+zx3XoJxi9bUfN9qtZZSyY=",
       "url": "_framework/blazor.boot.json"
     },
     {
@@ -1766,7 +1766,7 @@ self.assetsManifest = {
       "url": "imgPreguntas/Pregunta_99.jpg"
     },
     {
-      "hash": "sha256-FKj+tD/0IppEdY/S2bQndSNW84/75qSyx0+GbUBoLGo=",
+      "hash": "sha256-SWr43rgEwe9JlR4fRGnofKcC82GB+s41Vc4wcx7+UmA=",
       "url": "index.html"
     },
     {
