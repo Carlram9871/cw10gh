@@ -1,4 +1,4 @@
-﻿@page "/"
+@page "/"
 @using CuestionarioWeb10.Models
 @using CuestionarioWeb10.Services
 @inject PreguntaService PreguntaService
@@ -34,11 +34,9 @@ else
     }
 
     private void SeleccionarTema(string tema)
-{
-    NavigationManager.NavigateTo($"estudiar?tema={Uri.EscapeDataString(tema)}");
+    {
+        // Construir la URL correctamente para GitHub Pages
+        var url = $"estudiar?tema={Uri.EscapeDataString(tema)}";
+        NavigationManager.NavigateTo(url);
+    }
 }
-
-
-
-}
-
