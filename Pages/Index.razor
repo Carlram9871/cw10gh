@@ -34,9 +34,9 @@ else
     }
 
     private void SeleccionarTema(string tema)
-    {
-        var url = NavigationManager.BaseUri + $"estudiar?tema={Uri.EscapeDataString(tema)}";
-        NavigationManager.NavigateTo(url.Replace("index.html", ""));
-    }
+{
+    NavigationManager.NavigateTo($"#/estudiar?tema={Uri.EscapeDataString(tema)}");
+}
+
 }
 
