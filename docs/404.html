@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <title>Redirigiendo...</title>
-    <meta http-equiv="refresh" content="0; url=/cw10gh/index.html#">
-    <script>
-      // Construye la URL con hash para que Blazor pueda manejar el enrutamiento SPA
-      var l = window.location;
-      var path = l.pathname.replace(/^\/cw10gh/, '');
-      var search = l.search || '';
-      var hash = l.hash || '';
-      var newUrl = '/cw10gh/index.html#' + path + search + hash;
-      window.location.replace(newUrl);
-    </script>
-  </head>
-  <body>
-    <p>Redirigiendo...</p>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <title>Redirigiendo...</title>
+  <script>
+    // Detecta ruta base (GitHub Pages subcarpeta)
+    var base = "/cw10gh";
+
+    // Extrae la parte después del base path
+    var fullPath = window.location.pathname + window.location.search + window.location.hash;
+    var relativePath = fullPath.replace(new RegExp("^" + base), "");
+
+    // Redirige con hash para Blazor
+    var newUrl = base + "/index.html#" + relativePath;
+    window.location.replace(newUrl);
+  </script>
+</head>
+<body>
+  <p>Redirigiendo...</p>
+</body>
 </html>
