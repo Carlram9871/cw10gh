@@ -1,22 +1,46 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.JSInterop;
 
-public class CustomHashNavigationManager : NavigationManager
+namespace CuestionarioWeb10.Services
 {
-    protected override void EnsureInitialized()
+    public class CustomHashNavigationManager : NavigationManager
     {
-        var baseUri = base.BaseUri;
-        Initialize(baseUri, baseUri + "#/");
-    }
+        private readonly IJSRuntime _jsRuntime;
 
-    protected override void NavigateToCore(string uri, bool forceLoad)
-    {
-        var absoluteUri = ToAbsoluteUri(uri).AbsoluteUri;
-
-        if (!absoluteUri.Contains("#"))
+        public CustomHashNavigationManager(IJSRuntime jsRuntime)
         {
-            absoluteUri = absoluteUri.Replace(base.BaseUri, base.BaseUri + "#/");
+            _jsRuntime = jsRuntime;
         }
 
-        base.NavigateTo(absoluteUri, forceLoad);
+        protected override void NavigateToCore(string uri, bool forceLoad)
+        {
+            // Para GitHub Pages, manejamos la navegación con hash
+            if (uri.StartsWith("http"))
+            {
+                // URI absoluta
+                var baseUri = BaseUri.TrimEnd('/');
+                if (uri.StartsWith(baseUri))
+                {
+                    var relativePath = uri.Substring(baseUri.Length);
+                    uri = $"{baseUri}/#{relativePath}";
+                }
+            }
+            else
+            {
+                // URI relativa - agregar hash
+                uri = $"#{uri}";
+            }
+
+            if (forceLoad)
+            {
+                _jsRuntime.InvokeVoidAsync("window.location.replace", uri);
+            }
+            else
+            {
+                _jsRuntime.InvokeVoidAsync("window.history.pushState", null, "", uri);
+                NotifyLocationChanged(false);
+            }
+        }
     }
 }
