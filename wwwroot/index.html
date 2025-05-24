@@ -28,7 +28,14 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-    <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+    // Redirección para rutas con hash
+    if (location.pathname !== "/cw10gh/" && !location.pathname.endsWith("index.html")) {
+        location.replace("/cw10gh/#" + location.pathname + location.search + location.hash);
+    }
+</script>
+<script src="_framework/blazor.webassembly.js"></script>
+
     <script>navigator.serviceWorker.register('service-worker.js');</script>
 </body>
 
