@@ -36,7 +36,7 @@ else
     private async Task SeleccionarTema(string tema)
     {
         // Forzar navegación con la URL completa correcta
-        var url = $"/cw10gh/estudiar?tema={Uri.EscapeDataString(tema)}";
+        var url = $"cw10gh/estudiar?tema={Uri.EscapeDataString(tema)}";
         await JSRuntime.InvokeVoidAsync("window.location.href", url);
     }
 }
