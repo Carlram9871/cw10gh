@@ -1,4 +1,6 @@
-﻿@page "/estudiar/"
+@page "/estudiar"
+@page "/estudiar/"
+
 
 @inject NavigationManager Navigation
 @using CuestionarioWeb10.Models
@@ -51,10 +53,10 @@ else
     private string respuestaSeleccionada = null;
     private bool? esCorrecta = null;
 
-    protected override async Task OnInitializedAsync()
-    {
-        preguntas = await PreguntaService.ObtenerPreguntasPorTemaAsync(tema);
-    }
+    protected override async Task OnParametersSetAsync()
+{
+    preguntas = await PreguntaService.ObtenerPreguntasPorTemaAsync(tema);
+}
 
     private void SeleccionarRespuesta(string opcion)
     {
