@@ -2,7 +2,7 @@
 @using CuestionarioWeb10.Models
 @using CuestionarioWeb10.Services
 @inject PreguntaService PreguntaService
-@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 <h3>Selecciona un tema</h3>
 
@@ -33,10 +33,10 @@ else
         temas = await PreguntaService.ObtenerTemasAsync();
     }
 
-    private void SeleccionarTema(string tema)
+    private async Task SeleccionarTema(string tema)
     {
-        // Construir la URL correctamente para GitHub Pages
-        var url = $"estudiar?tema={Uri.EscapeDataString(tema)}";
-        NavigationManager.NavigateTo(url);
+        // Forzar navegación con la URL completa correcta
+        var url = $"/cw10gh/estudiar?tema={Uri.EscapeDataString(tema)}";
+        await JSRuntime.InvokeVoidAsync("window.location.href", url);
     }
 }
